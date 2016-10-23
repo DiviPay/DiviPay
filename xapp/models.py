@@ -2,6 +2,7 @@ import os
 from pymongo import MongoClient
 
 DATABASE = MongoClient('localhost', 27017)
+DATABASE.drop_database('divipay')
 db = DATABASE['divipay']
 
 GROUPS_COLLECTION = db.groups
