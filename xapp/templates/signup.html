@@ -1,0 +1,15 @@
+<html>
+  <head>
+    <title>{{ title }}</title>
+  </head>
+  <body>
+    <form class="form-horizontal" action="" method="POST" role="form">
+      {{ form.hidden_tag() }}
+      {% for field in form if field.widget.input_type != 'hidden' %}
+        <label class="control-label" for="{{ field.name }}" > {{ field.label }}</label>
+          {{ field }}
+      {% endfor %}
+      <button type="submit" id="login_btn" class="btn btn-default">Signup</button>
+    </form>
+  </body>
+</html>

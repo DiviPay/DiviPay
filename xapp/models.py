@@ -2,7 +2,7 @@ import os
 from pymongo import MongoClient
 
 DATABASE = MongoClient('localhost', 27017)
-db = DATABASE['xapp']
+db = DATABASE['divipay']
 
 GROUPS_COLLECTION = db.groups
 USERS_COLLECTION = db.users

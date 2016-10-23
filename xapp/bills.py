@@ -2,7 +2,7 @@ from xapp.models import BILLS_COLLECTION
 import datetime
 
 
-class AddBill():
+class AddBill(object):
     def __init__(self, topic, amount, currency=None, paidBy=None, billShare=None, tag=None, datetime=None):
         self.topic = topic
         self.amount = amount
@@ -21,7 +21,7 @@ class AddBill():
         return billID
 
 
-class Bill():
+class Bill(object):
     def __init__(self, billID):
         self.billID = billID
 
