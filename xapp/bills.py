@@ -1,7 +1,6 @@
 from xapp.models import BILLS_COLLECTION
 import datetime
 
-
 class AddBill(object):
     def __init__(self, topic, amount, currency=None, paidBy=None, billShare=None, tag=None, datetime=None):
         self.topic = topic
@@ -14,9 +13,9 @@ class AddBill(object):
 
     def addBill(self):
         billID = BILLS_COLLECTION.insert_one({
-                    'topic': self.topic, 'amount': self.amount, 'currency': self.currency,
-                    'paidBy': self.paidBy, 'billShare': self.billShare, 'tag': self.tag,
-                    'datetime': self.datetime
+            'topic': self.topic, 'amount': self.amount, 'currency': self.currency,
+            'paidBy': self.paidBy, 'billShare': self.billShare, 'tag': self.tag,
+            'datetime': self.datetime
             }).inserted_id
         return billID
 
@@ -35,7 +34,7 @@ class Bill(object):
         BILLS_COLLECTION.find_one_and_update({'_id': self.billID}, {'$set': {'currency': currency}})
 
     def addPaidBy(self, paidbyShare):
-        BILLS_COLLECTION.find_one_and_update({'_id': self.billID}, {'$set': {'paidBy': paidBy}})
+        BILLS_COLLECTION.find_one_and_update({'_id': self.billID}, {'$set': {'paidBy': paidbyShare}})
 
     def addbillShare(self, billShare):
         BILLS_COLLECTION.find_one_and_update({'_id': self.billID}, {'$set': {'billShare': billShare}})

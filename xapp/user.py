@@ -1,6 +1,7 @@
 from werkzeug.security import check_password_hash, generate_password_hash
 from xapp.models import USERS_COLLECTION
 from flask_login import UserMixin
+from bson.objectid import ObjectId
 
 class User(UserMixin):
     def __init__(self, username, email=None, firstname=None, lastname=None, password=None, db=False):
@@ -36,5 +37,8 @@ class User(UserMixin):
     def validate_login(password_hash, password):
         return check_password_hash(password_hash, password)
 
-    def updateGroups(groupID):
-        USERS_COLLECTION.find_one_and_update({'_id': ObjectId(groupID)}, {'$addToSet': {'groups': groupID}})
+    def updateGroups(self, groupID):
+        USERS_COLLECTION.find_one_and_update({
+            '_id': ObjectId(groupID)}, {
+            '$addToSet': {'groups': groupID}
+        })
