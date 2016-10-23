@@ -98,6 +98,39 @@ body{
 	left: 36%;
 }
 
+#settag h1{
+	font-family: 'Open Sans';
+	font-weight: 300;
+	font-size: 28px;
+	position: relative;
+	top: 98px;
+	color: #6d6d6d;
+	left: 36%;
+}
+
+#settag select{
+	position: relative;
+	border-top: none;
+	border-left: none;
+	border-right: none;
+	outline: none;
+	font-family: 'Open Sans';
+	font-weight: 300;
+	font-size: 28px;
+	left: 48%;
+	top: 50px;
+	padding-left: 10px;
+	width: 90px;
+	color: #adadad;
+	border: 1px #adadad;
+}
+
+#settag hr,#members hr{
+	width: 50%;
+	top: 55px;
+	position: relative;
+}
+
 #enter_topic input[type=text]{
 	position: relative;
 	border-top: none;
@@ -130,6 +163,10 @@ body{
 	border: 1px #adadad;
 
 }
+#members,#members_2{
+	position: relative;
+	right: 70px;
+}
 
 #members h2{
 	font-family: 'Open Sans';
@@ -137,24 +174,47 @@ body{
 	font-size: 18px;
 	color: #4fc195;
 	left: 45%;
-	position: relative;
 	top: 70px;
+	position: relative;
+
 }
+
+#members_2 h2{
+	font-family: 'Open Sans';
+	font-weight: 400;
+	font-size: 18px;
+	color: #4fc195;
+	left: 45%;
+	position: relative;
+	top: 10px;
+	
+	}
 
 #members ol{
 	position: relative;
-	top: 20%;
-	margin-top:90px; 
+	margin-top:100px; 
 }
 
-#members ol li{
+#members_2 ol{
+	position: relative;
+	top: 20px;
+}
+
+#members ol li,#members_2 ol li{
 	list-style: none;
+	position: relative;
+	margin-bottom: 10px;
 }
 
-#members ol li input{
-	left: 15%;
+#members ol li input,#members_2 ol li input{
+	margin-bottom: 10px;
+	width: 300px;
 }
-#members ol li{
+
+#members ol li input[type=text],#members_2 ol li input[type=text]{
+	padding-left: 10px;
+}
+#members ol li,#members_2 ol li{
 	font-family: 'Open Sans';
 	font-weight: 300;
 	font-size: 24px;
@@ -169,21 +229,6 @@ input[type="checkbox"] {
     margin-right: 10px;
 }
 
-#main input[type=file]{
-	
-	border-radius: 50px;
-	color: #abc93f;
-	border: 1px #abc93f;
-	font-weight: 300;
-	font-size: 16px;
-	background-color: transparent;
-	padding:  10px 32px 10px 32px;
-	font-family: 'Open Sans';
-	left: 42%;
-	position: relative;
-	margin-top: 25px;
-
-}
 
 
 #main input[type=submit]{
@@ -197,9 +242,10 @@ input[type="checkbox"] {
 	font-family: 'Open Sans';
 	font-weight: 600;
 	font-size: 16px;
-	left: 45%;
+	left: 44%;
 	position: relative;
-	margin-top: 2%;
+	
+	margin-bottom: 5%;
 }
 
 #main input[type=submit]:hover{

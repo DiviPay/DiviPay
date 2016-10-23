@@ -46,35 +46,50 @@
 				<input id="topic" type="text" placeholder="Breakfast at Tiffany's"></input>
 			</div>
 
-			<div id="members">
-				<h2>Select Members</h2>
-				<ol>
-					<li>
-						<input type="checkbox" name="friend" value="userid">Shashwat Shalvi<br>
-					</li>
-
-					<li>
-						<input type="checkbox" name="friend" value="userid">Shubham Gupta<br>
-					</li>
-
-					<li>
-						<input type="checkbox" name="friend" value="userid">Vidhan Jain<br>
-					</li>
-
-					<li>
-						<input type="checkbox" name="friend" value="userid">Rishi Vikram<br>
-					</li>
-
-					<li>
-						<input type="checkbox" name="friend" value="userid">Jeet Kanjani<br>
-					</li>
-				</ol>
+			<div id="settag">
+				<h1>Select Tag</h1>
+				<select>
+				  <option value="123">123</option>
+				  <option value="456">456</option>
+				  <option value="789">789</option>
+				  <option value="112">112</option>
+				</select>
+				<hr>
 			</div>
 
-			<input type="file" name="pic" accept="image/*">
-  			
+			<div id="members">
+				<h2>Select Paying Members</h2>
+				<ol>
+					<li>
+						<h5>Shashwat Shalvi</h5>
+						<input type="text" id="payed_amount" placeholder="0">
+					</li>
 
-			<input type="submit" id="create_bill" value="CREATE BILL"></input>
+					<li>
+						<h5>Shubham Gupta</h5>
+						<input type="text" id="payed_amount" placeholder="0">
+					</li>
+
+					<li>
+						<h5>Vidhan Jain</h5>
+						<input type="text" id="payed_amount" placeholder="0">
+					</li>
+
+					<li>
+						<h5>Rishi Vikram</h5>
+						<input type="text" id="payed_amount" placeholder="0">
+					</li>
+
+					<li>
+						<h5>Jeet Kanjani</h5>
+						<input type="text" id="payed_amount" placeholder="0">
+					</li>
+
+				</ol>
+				<hr>
+			</div>
+
+		<input type="submit" id="create_bill" value="CREATE BILL"></input>
 		</div>
 	</body>
 </html>
