@@ -8,5 +8,6 @@ def find_acronyms(link='http://www.easy-forex.com/au/currencyacronyms/'):
     cur_list = list()
     for row in soup.find('table').find('tbody').find_all('tr'):
         cur_list.append(row.find_all('td')[1].get_text())
-    return cur_list
+    print (cur_list)
 
+find_acronyms()

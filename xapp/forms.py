@@ -37,8 +37,9 @@ class BillForm(FlaskForm):
         groupUsers = (GROUPS_COLLECTION.find_one({'_id': userID}))['users']
         topic = StringField('Topic', validators=[DataRequired(), Length(max=25)])
         amount = IntegerField('Amount', validators=[DataRequired()])
-        ########## not done
-        currencies = ['INR', 'USD']
+        with open('currency.txt', 'r') as f:
+            currencies = readline()
+        print (currencies)
         currency = RadioField('Currency', choices=currencies)
         date = DateField('Date', validators=[DataRequired()], default=datetime.datetime.utcnow())
         paidBy = FormField(PaidBy)

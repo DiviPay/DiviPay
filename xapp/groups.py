@@ -5,11 +5,12 @@ import datetime
 
 
 class AddGroup(object):
-    def __init__(self, name, users=None, timestamp=None, simplify=False):
+    def __init__(self, name, users=None, bills=None, timestamp=None, simplify=False):
         self.name = name
         self.timestamp = datetime.datetime.utcnow()
         self.users = users
         self.users.append(current_user.get_id())
+        self.bills = []
         self.simplify = simplify
 
     def addGroup():
