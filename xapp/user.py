@@ -9,7 +9,7 @@ class User(UserMixin):
         if db:
             USERS_COLLECTION.insert_one({
                 '_id': self.email, 'nickname': self.nickname,
-                'friends': [], 'groups': []
+                'friends': [], 'groups': [], 'bills': []
                 })
 
     @property
@@ -36,9 +36,8 @@ class User(UserMixin):
     def addUserToFriend(self, emailID):
         #if not USERS_COLLECTION.find_one({'_id': emailID}):
         #    usr = User(emailID)
-        USERS_COLLECTION.find_one_and_update({'_id': emailID}, {'$addToSet': {'friends': self.username}}, upsert=True)
+        USERS_COLLECTION.find_one_and_update({'_id': emailID}, {'$addToSet': {'friends': self.email}}, upsert=True)
 
     def addFriend(self, emailID):
-        USERS_COLLECTION.find_one_and_update({'_id': self.username}, {'$addToSet': {'friends': emailID}})
-        usr = User(self.username)
-        usr.addUserToFriend(emailID)
+        USERS_COLLECTION.find_one_and_update({'_id': self.email}, {'$addToSet': {'friends': emailID}})
+        self.addUserToFriend(emailID)

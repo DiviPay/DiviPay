@@ -24,11 +24,12 @@
 			<div id="white_card">
 				<div id="logo_container">
 				</div>
-					<div id="paytm_signup">
-						<input type="submit" id="paytm" onClick="" value="LOGIN VIA PAYTM">
-						</input>
-					</div>
-
+					<a href={{ url_for('oauth_authorize', provider='googleplus') }}>
+						<div id="paytm_signup">
+							<input type="submit" id="paytm" onClick="" value="LOGIN VIA GOOGLE">
+							</input>
+						</div>
+					</a>
 					<h5>OR</h5>
 					
 				<div id="form">
