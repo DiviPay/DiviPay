@@ -141,3 +141,7 @@ input[type="checkbox"] {
 #main input[type=submit]:hover{
 	background: #2d9169;
 }
+
+input[type=checkbox]{
+margin-right: 10px;
+}

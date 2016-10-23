@@ -107,11 +107,29 @@ def simplification(groupID):
 
 @app.route('/addBill/', methods=['GET', 'POST'])
 def addBill():
-    userID = current_user.get_id()
-    form = BillForm(userID)
+	userID = current_user.get_id()
+    form = BillForm()
+    friends = USERS_COLLECTION.find_one({'_id': userID})['users']
     if request.method == 'POST':
-        pass
-    return render_template('addBill.html', form=form)
+        amount = form.amount.data
+        currency = form.currency.data
+        topic = form.topic.data
+        members = form.members.data
+        pic = form.pic.data
+        print(amount, currency, topic, members, pic)
+        ############## not complete
+    return render_template('add_bill.html', form=form, friends=friends)
+
+@login_required
+@app.route('/addFriend/', methods=['GET', 'POST'])
+def addFriend():
+    form = FriendForm()
+    if request.method == 'POST':
+        email = form.emailid.data
+        usr = User(current_user.get_id())
+        usr.addFriend(email)
+        return redirect(url_for('dashboard'))
+    return render_template('add_friend.html', form=form)
 
 
 @lm.user_loader
