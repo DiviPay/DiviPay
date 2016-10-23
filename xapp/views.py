@@ -60,7 +60,7 @@ def addGroup():
         usr = User(userID)
         usr.updateGroups(groupID)
         return render_template(url_for('viewGroup', groupID=groupID))
-    return render_template('addgroup.html', form=form, friends=friends)
+    return render_template('addgroup.html', form=form, friends=userFriends)
 
 
 @app.route('/groups/<groupID>/', methods=['GET'])
