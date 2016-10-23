@@ -1,6 +1,7 @@
 from xapp.application import app, lm
 from xapp.forms import GroupForm, LoginForm, SignUpForm, BillForm
 import pymongo
+from groups import AddGroup, Group
 from flask import request, redirect, render_template, url_for, flash, session
 from flask_login import login_user, logout_user, login_required, current_user
 from xapp.models import USERS_COLLECTION, GROUPS_COLLECTION, BILLS_COLLECTION, TRANSACTION_COLLECTION
@@ -12,7 +13,7 @@ from bson.objectid import ObjectId
 def login():
     form = LoginForm()
     if request.method == 'POST' and form.validate_on_submit():
-        user = USERS_COLLECTION.find_one({ "_id": form.username.data })
+        user = USERS_COLLECTION.find_one({"_id": form.username.data})
         if user and User.validate_login(user['password'], form.password.data):
             user_obj = User(user['_id'])
             login_user(user_obj, remember=True)
@@ -28,16 +29,16 @@ def login():
 def signup():
     form = SignUpForm()
     if request.method == 'POST' and form.validate_on_submit():
-        user = USERS_COLLECTION.find_one( {'email': form.email.data} )
+        user = USERS_COLLECTION.find_one({'email': form.email.data})
         if user:
             flash("You have already signed up from this email id", category='error')
         else:
-            user = USERS_COLLECTION.find_one( {'_id': form.username.data} )
+            user = USERS_COLLECTION.find_one({'_id': form.username.data})
             if user:
                 flash("That username has already been taken", category='error')
             else:
-                user_obj = User(form.username.data, form.email.data, form.firstname.data,
-                        form.lastname.data, form.password.data, db=True)
+                User(form.username.data, form.email.data, form.firstname.data,
+                     form.lastname.data, form.password.data, db=True)
                 flash("SignUp successfull!", category='success')
                 return redirect(url_for('login'))
     return render_template('signup.html', title='HoverSpace | Signup', form=form)
@@ -59,7 +60,7 @@ def addGroup():
         groupID = group.addGroup()
         usr = User(userID)
         usr.updateGroups(groupID)
-        return render_template(url_for('viewGroup', groupID=groupID))
+        return redirect(url_for('viewGroup', groupID=groupID))
     return render_template('addgroup.html', form=form, friends=userFriends)
 
 
@@ -67,6 +68,11 @@ def addGroup():
 def viewGroup(groupID):
     return render_template('groups.html', groupID=groupID)
 
+@app.route('/groups/<groupID>/simplify', methods=['GET'])
+def simplification(groupID):
+    grp = Group(groupID)
+    grp.simplify()
+    return redirect(url_for('viewGroup', groupID=groupID))
 
 @app.route('/addBill/', methods=['GET', 'POST'])
 def addBill():
@@ -79,7 +85,7 @@ def addBill():
 
 @lm.user_loader
 def load_user(username):
-    u = USERS_COLLECTION.find_one({'_id': username})
-    if not u:
+    user = USERS_COLLECTION.find_one({'_id': username})
+    if not user:
         return None
-    return User(u['_id'])
+    return User(user['_id'])
