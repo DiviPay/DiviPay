@@ -30,37 +30,27 @@
 				</div>
 			</div>
 
-			<div id="enter_groupname">
-				<h1>Your group name is</h1>
-				<input id="groupname" type="text" placeholder="myGroup"></input>
-			</div>
+			<form class="form-horizontal" name="form" action="" method="POST">
+				{{ form.hidden_tag() }}
+				<div id="enter_groupname">
+					<h1>Your group name is</h1>
+					{% for field in form if field.widget.input_type != 'hidden' %}
+			       		<input name="{{ field.name }}" id="groupname" type="text" placeholder="{{ field.description }}">
+			       	{% endfor %}
+				</div>
 
-			<div id="members">
-				<h2>Select Members</h2>
-				<ol>
-					<li>
-						<input type="checkbox" name="friend" value="userid">Shashwat Shalvi<br>
-					</li>
-
-					<li>
-						<input type="checkbox" name="friend" value="userid">Shubham Gupta<br>
-					</li>
-
-					<li>
-						<input type="checkbox" name="friend" value="userid">Vidhan Jain<br>
-					</li>
-
-					<li>
-						<input type="checkbox" name="friend" value="userid">Rishi Vikram<br>
-					</li>
-
-					<li>
-						<input type="checkbox" name="friend" value="userid">Jeet Kanjani<br>
-					</li>
-				</ol>
-			</div>
-
-			<input type="submit" id="create_group" value="CREATE GROUP"></input>
+				<div id="members">
+					<h2>Select Members</h2>
+					<ol>
+						{% for friend in friends %}
+							<li>
+								<input type="checkbox" name="friend" value="{{friend}}">{{ friend }}<br>
+							</li>
+						{% endfor %}
+					</ol>
+				</div>
+				<input type="submit" id="create_group" value="CREATE GROUP"></input>
+			</form>
 		</div>
 	</body>
 </html>

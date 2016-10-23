@@ -21,12 +21,9 @@
 	<body>
 		<div id="main">
 			<div id="slant_gradient"></div>
-
 			<div id="white_card">
-
 				<div id="logo_container">
 				</div>
-
 					<div id="paytm_signup">
 						<input type="submit" id="paytm" onClick="" value="LOGIN VIA PAYTM">
 						</input>
@@ -35,16 +32,14 @@
 					<h5>OR</h5>
 					
 				<div id="form">
-					<form class="form-horizontal"name="login"id="login">
-						<input type = "text" id="email_login" name="email"placeholder="Email">
-						<br>
-						<input type = "text" id="phone_login" name="phone"placeholder="Mobile">
-						<br>
-						<input type = "password" id="password_signup" name="password"placeholder="Password">
-					</form>
-						<input type="submit" value="LOGIN">	</input>				
+					<form class="form-horizontal" name="login" id="login" action="" method="POST">
+			          {{ form.hidden_tag() }}
+			          {% for field in form if field.widget.input_type != 'hidden' %}
+			          	<input type="{{ field.default }}" name="{{ field.name }}" placeholder="{{ field.description }}">
+			          {% endfor %}
+			          <input type="submit" value="LOGIN">
+			        </form>
 				</div>
-
 				
 			</div>
 		</div>
