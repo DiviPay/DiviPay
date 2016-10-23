@@ -29,67 +29,38 @@
 						<div id="dashboard">DASHBOARD</div>	
 				</div>
 			</div>
+			<form class="form-horizontal" name="login" id="login" action="" method="POST">
+			    {{ form.hidden_tag() }}
+				<div id="enter_amount">
+					<h1>Amount</h1>
+					<input id="amount" type="text" placeholder="100"></input>
+					<select id="currency">
+					  <option value="INR">INR</option>
+					  <option value="USD">USD</option>
+					  <option value="GBP">GBP</option>
+					  <option value="BHD">BHD</option>
+					</select>
+				</div>
 
-			<div id="enter_amount">
-				<h1>Amount</h1>
-				<input id="amount" type="text" placeholder="100"></input>
-				<select>
-				  <option value="Rupees">Rs</option>
-				  <option value="Dollar">Do</option>
-				  <option value="Pound">Po</option>
-				  <option value="Dinar">Di</option>
-				</select>
-			</div>
+				<div id="enter_topic">
+					<h1>Topic</h1>
+					<input id="topic" type="text" placeholder="Breakfast at Tiffany's"></input>
+				</div>
 
-			<div id="enter_topic">
-				<h1>Topic</h1>
-				<input id="topic" type="text" placeholder="Breakfast at Tiffany's"></input>
-			</div>
+				<div id="members">
+					<h2>Select Members</h2>
+					<ol>
+						{% for friend in friends %}
+							<li>
+								<input type="checkbox" name="friend" value="{{friend}}">{{ friend }}<br>
+							</li>
+						{% endfor %}
+					</ol>
+				</div>
 
-			<div id="settag">
-				<h1>Select Tag</h1>
-				<select>
-				  <option value="123">123</option>
-				  <option value="456">456</option>
-				  <option value="789">789</option>
-				  <option value="112">112</option>
-				</select>
-				<hr>
-			</div>
-
-			<div id="members">
-				<h2>Select Paying Members</h2>
-				<ol>
-					<li>
-						<h5>Shashwat Shalvi</h5>
-						<input type="text" id="payed_amount" placeholder="0">
-					</li>
-
-					<li>
-						<h5>Shubham Gupta</h5>
-						<input type="text" id="payed_amount" placeholder="0">
-					</li>
-
-					<li>
-						<h5>Vidhan Jain</h5>
-						<input type="text" id="payed_amount" placeholder="0">
-					</li>
-
-					<li>
-						<h5>Rishi Vikram</h5>
-						<input type="text" id="payed_amount" placeholder="0">
-					</li>
-
-					<li>
-						<h5>Jeet Kanjani</h5>
-						<input type="text" id="payed_amount" placeholder="0">
-					</li>
-
-				</ol>
-				<hr>
-			</div>
-
-		<input type="submit" id="create_bill" value="CREATE BILL"></input>
+				<!--<input type="file" name="pic" accept="image/*">-->
+				<input type="submit" id="create_bill" value="CREATE BILL"></input>
+			</form>
 		</div>
 	</body>
 </html>

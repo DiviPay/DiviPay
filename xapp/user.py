@@ -32,3 +32,13 @@ class User(UserMixin):
             '_id': ObjectId(groupID)}, {
             '$addToSet': {'groups': groupID}
         })
+
+    def addUserToFriend(self, emailID):
+        #if not USERS_COLLECTION.find_one({'_id': emailID}):
+        #    usr = User(emailID)
+        USERS_COLLECTION.find_one_and_update({'_id': emailID}, {'$addToSet': {'friends': self.username}}, upsert=True)
+
+    def addFriend(self, emailID):
+        USERS_COLLECTION.find_one_and_update({'_id': self.username}, {'$addToSet': {'friends': emailID}})
+        usr = User(self.username)
+        usr.addUserToFriend(emailID)
