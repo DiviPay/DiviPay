@@ -1,5 +1,5 @@
 from xapp.application import app, lm
-from xapp.forms import GroupForm, LoginForm, SignUpForm, BillForm
+from xapp.forms import GroupForm, LoginForm, SignUpForm, BillForm, FriendForm
 from xapp.groups import AddGroup, Group
 from flask import request, redirect, render_template, url_for, flash, session
 from flask_login import login_user, logout_user, login_required, current_user
@@ -10,27 +10,24 @@ from xapp.oauth import OAuthSignIn
 import pymongo
 import requests
 
-@app.route('/')
-def index():
-    return render_template('index.html')
 
-"""@app.route('/login/', methods=['GET', 'POST'])
+@app.route('/', methods=['GET'])
+@app.route('/login/', methods=['GET', 'POST'])
 def login():
-	
-form = LoginForm()
+    form = LoginForm()
     if request.method == 'POST' and form.validate_on_submit():
         user = USERS_COLLECTION.find_one({"_id": form.username.data})
         if user and User.validate_login(user['password'], form.password.data):
             user_obj = User(user['_id'])
             login_user(user_obj, remember=True)
             flash("Logged in successfully!", category='success')
-            #return redirect(url_for(''))
+            return redirect(url_for('dashboard'))
         flash("Wrong username or password!", category='error')
     print(current_user.get_id())
-    return render_template('login1.html', title='DiviPay | Login', form=form)
-    # login1.html kara hai"""
+    return render_template('login.html', title='DiviPay | Login', form=form)
+# login1.html kara hai
 
-
+'''
 @app.route('/signup/', methods=['GET', 'POST'])
 def signup():
     form = SignUpForm()
@@ -44,20 +41,27 @@ def signup():
                 flash("That username has already been taken", category='error')
             else:
                 User(form.username.data, form.email.data, form.firstname.data,
-                     form.lastname.data, form.password.data, db=True)
+                        form.lastname.data, form.password.data, db=True)
                 flash("SignUp successfull!", category='success')
                 return redirect(url_for('login'))
     return render_template('signup.html', title='HoverSpace | Signup', form=form)
+'''
+
+@app.route('/dashboard/')
+def dashboard():
+    return "dashboard"
+    #render_template('dashboard.html')
+
 
 @app.route('/logout/')
 def logout():
     logout_user()
-    return redirect(url_for('index'))
+    return redirect(url_for('login'))
 
 @app.route('/authorize/<provider>')
 def oauth_authorize(provider):
     if not current_user.is_anonymous:
-        return redirect(url_for('index'))
+        return redirect(url_for('dashboard'))
     oauth = OAuthSignIn.get_provider(provider)
     return oauth.authorize()
 
@@ -65,12 +69,12 @@ def oauth_authorize(provider):
 @app.route('/callback/<provider>')
 def oauth_callback(provider):
     if not current_user.is_anonymous:
-        return redirect(url_for('index'))
+        return redirect(url_for('login'))
     oauth = OAuthSignIn.get_provider(provider)
     username, email = oauth.callback()
     if email is None:
         flash('Authentication failed.')
-        return redirect(url_for('index'))
+        return redirect(url_for('login'))
     user = USERS_COLLECTION.find_one({'_id': email})
     if not user:
         nick = username
@@ -79,7 +83,8 @@ def oauth_callback(provider):
         user = User(email, nickname=nick, db=True)
 
     login_user(user, remember=True)
-    return redirect(url_for('index'))
+    print(current_user.get_id())
+    return redirect(url_for('dashboard'))
 
 @app.route('/addgroup/', methods=['GET', 'POST'])
 def addGroup():
@@ -87,17 +92,18 @@ def addGroup():
     form = GroupForm()
     userFriends = (USERS_COLLECTION.find_one({'_id': userID}))['friends']
     if request.method == 'POST':
-        group = AddGroup(form.name.data, form.users.data)
+        group = AddGroup(form.name.data, request.form.getlist('friend'))
         groupID = group.addGroup()
         usr = User(userID)
         usr.updateGroups(groupID)
         return redirect(url_for('viewGroup', groupID=groupID))
-    return render_template('addgroup.html', form=form, friends=userFriends)
+    return render_template('create_group.html', form=form, friends=userFriends)
 
 
 @app.route('/groups/<groupID>/', methods=['GET'])
 def viewGroup(groupID):
-    return render_template('groups.html', groupID=groupID)
+    return render_template('group.html', groupID=groupID, title="DiviPay | Groups")
+
 
 @app.route('/groups/<groupID>/simplify', methods=['GET'])
 def simplification(groupID):
@@ -107,9 +113,9 @@ def simplification(groupID):
 
 @app.route('/addBill/', methods=['GET', 'POST'])
 def addBill():
-	userID = current_user.get_id()
+    userID = current_user.get_id()
     form = BillForm()
-    friends = USERS_COLLECTION.find_one({'_id': userID})['users']
+    friends = USERS_COLLECTION.find_one({'_id': userID})['friends']
     if request.method == 'POST':
         amount = form.amount.data
         currency = form.currency.data
