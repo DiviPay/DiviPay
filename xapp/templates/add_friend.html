@@ -21,21 +21,22 @@
 	<body>
 		<div id="main">
 			<div id="header">
-				
-
 				<div id="navbar">
-					
 						<div id="bill">BILL</div>
 						<div id="dashboard">DASHBOARD</div>	
 				</div>
 			</div>
+			<form class="form-horizontal" name="form" id="form" action="" method="POST">
+			    {{ form.hidden_tag() }}
+				<div id="enter_email">
+					<h1>Friend's Email ID</h1>
 
-			<div id="enter_email">
-				<h1>Friend's EmailID</h1>
-				<input id="emailid" type="text" placeholder="abc@xyz.com"></input>
-			</div>
-
-			<input type="submit" id="add_friend" value="ADD FRIEND"></input>
+					{% for field in form if field.widget.input_type != 'hidden' %}
+          				<input name="{{field.name}}" type="text" placeholder="abc@xyz.com">
+          			{% endfor %}
+				</div>
+				<input type="submit" id="add_friend" value="ADD FRIEND">
+			</form>
 		</div>
 	</body>
 </html>
