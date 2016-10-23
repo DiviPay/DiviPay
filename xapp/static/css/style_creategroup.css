@@ -90,13 +90,13 @@ body{
 	color: #4fc195;
 	left: 44.5%;
 	position: relative;
-	top: 80px;
+	top: 70px;
 }
 
 #members ol{
 	position: relative;
 	top: 20%;
-	margin-top:110px; 
+	margin-top:90px; 
 }
 
 #members ol li{
@@ -117,6 +117,10 @@ body{
 	margin-right: 5px;
 
 }
+input[type="checkbox"] {
+    margin-right: 10px;
+}
+
 
 #main input[type=submit]{
 	border-radius: 50px;
@@ -129,7 +133,7 @@ body{
 	font-family: 'Open Sans';
 	font-weight: 600;
 	font-size: 16px;
-	left: 42%;
+	left: 44%;
 	position: relative;
 	margin-top: 2%;
 }

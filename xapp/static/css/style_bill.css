@@ -193,23 +193,51 @@ body{
 	display: inline;
 	width: 33%;
 	position: relative;
-	background-color: white;
+	top: 10px;
 }
 
 #negative ol{
-	display: inline;
+	
 	width: 33%;
 	left: 30%;
 	position: relative;
-
+	top: 110px;
 }
 
 #negative ol li{
 	display: inline;
 	width: 30%;
-	
 	width: 33%;
 	letter-spacing: 50%;
 	position: relative;
 }
+
+#negative ol li h2{
+	display: inline;
+	font-family: 'Open Sans';
+	color: #898989;
+	font-size: 24px;
+	font-weight: 300;
+	margin-top: 10px;
+	position: relative;
+
+}
+
+
+#negative ol li h4{
+	display: inline;
+}
+
+
+#negative ol li h3{
+	display: inline;
+}
+
+#bills hr{
+	position: relative;
+	right: 900px;
+	top: 20%;
+	z-index: 10;
+}
+
 

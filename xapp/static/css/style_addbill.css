@@ -136,15 +136,15 @@ body{
 	font-weight: 400;
 	font-size: 18px;
 	color: #4fc195;
-	left: 44.5%;
+	left: 45%;
 	position: relative;
-	top: 80px;
+	top: 70px;
 }
 
 #members ol{
 	position: relative;
 	top: 20%;
-	margin-top:110px; 
+	margin-top:90px; 
 }
 
 #members ol li{
@@ -157,13 +157,34 @@ body{
 #members ol li{
 	font-family: 'Open Sans';
 	font-weight: 300;
-	font-size: 18px;
+	font-size: 24px;
 	color: #adadad;
 	position: relative;
 	left: 43%;
 	margin-top: 10px;
+	margin-right: 5px;
 
 }
+input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+#main input[type=file]{
+	
+	border-radius: 50px;
+	color: #abc93f;
+	border: 1px #abc93f;
+	font-weight: 300;
+	font-size: 16px;
+	background-color: transparent;
+	padding:  10px 32px 10px 32px;
+	font-family: 'Open Sans';
+	left: 42%;
+	position: relative;
+	margin-top: 25px;
+
+}
+
 
 #main input[type=submit]{
 	border-radius: 50px;
@@ -176,7 +197,7 @@ body{
 	font-family: 'Open Sans';
 	font-weight: 600;
 	font-size: 16px;
-	left: 42%;
+	left: 45%;
 	position: relative;
 	margin-top: 2%;
 }
@@ -184,3 +205,4 @@ body{
 #main input[type=submit]:hover{
 	background: #2d9169;
 }
+
